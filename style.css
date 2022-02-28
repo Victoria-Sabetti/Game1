@@ -1,0 +1,28 @@
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url(Back.jpeg);
+    background-size: cover;
+}
+div {
+    font-size: 50px;
+    position: absolute;
+
+}
+.score {
+    left: 10px;
+    top: 10px;
+    font-size: 60px;
+    color: brown;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
