@@ -2,8 +2,8 @@ const canvas = document.querySelector('canvas');
 const c = canvas.getContext('2d');
 
 //cover the screen
-canvas.width = innerWidth;
-canvas.height = innerHeight;
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
 var falling = [];
 var catchers = [];
@@ -20,7 +20,7 @@ class Catcher {
         this.y = y;
         this.width = width;
         this.height = height;
-        this.speed = 5;
+        this.speed = 10;
     }
 
     draw() {
@@ -34,16 +34,16 @@ class Catcher {
         if (right) this.x += this.speed;
         if (left) this.x -= this.speed;
 
-        if (this.x <0) {
+        if (this.x < 0) {
             this.x = 0;
         }
-        if(this.x + this.width > canvas.width) {
-        this.x = canvas.width - this.width;
+        if (this.x + this.width > canvas.width) {
+            this.x = canvas.width - this.width;
         }
     }
 }
 
-catchers.push(new Catcher(canvas.width/2 - 200/2, canvas.height - 30 - 10, 200, 30));
+catchers.push(new Catcher(canvas.width / 2 - 200 / 2, canvas.height - 30 - 10, 200, 30));
 catchers.push(new Catcher(catchers[0].x, catchers[0].y - 30, 20, 30));
 catchers.push(new Catcher(catchers[0].x + catchers[0].width - 20, catchers[0].y - 30, 20, 30));
 
@@ -73,7 +73,7 @@ class Falling {
 
 setInterval(() => {
     //positioning the falling balls q2sec
-    var x = Math.random() * ((canvas.width - 20) -20) +20;
+    var x = Math.random() * ((canvas.width - 20) - 20) + 20;
     falling.push(new Falling(x, -10, 20));
 }, 2000);
 
@@ -81,15 +81,21 @@ function animation() {
     requestAnimationFrame(animation);
     c.clearRect(0, 0, canvas.width, canvas.height);
 
-    falling.forEach((falling, index) => {
-        falling.update();
+    for (var i = 0; i < falling.length; i++) {
+        falling[i].update();
 
-        if(falling.y + falling.radius > catchers[0].y) {
-            setTimeout(function () {
-                falling.splice(index, 1)
-            }, 0);
-            }
-    });
+        if (falling[i].y + falling[i].radius > catchers[0].y &&
+            catchers[0].x <= falling[i].x + falling[i].radius &&
+            falling[i].x - falling[i].radius <= catchers[0].x + catchers[0].width) {
+
+            falling.splice(i, 1);
+            scoreNum++;
+            score.innerHTML = scoreNum.toString();
+        } else if (falling[i].y - falling[i].radius > catchers[0].y) {
+            falling.splice(i, 1);
+        }
+    }
+
 
     catchers.forEach((catchers) => {
         catchers.update();
