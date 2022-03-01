@@ -71,7 +71,7 @@ class Falling {
     }
 }
 
-setInterval(() => {
+var create = setInterval(() => {
     //positioning the falling balls q2sec
     var x = Math.random() * ((canvas.width - 20) - 20) + 20;
     falling.push(new Falling(x, -10, 20));
@@ -92,7 +92,12 @@ function animation() {
             scoreNum++;
             score.innerHTML = scoreNum.toString();
         } else if (falling[i].y - falling[i].radius > catchers[0].y) {
-            falling.splice(i, 1);
+            //falling.splice(i, 1);
+            falling.splice(0, falling.length);
+            //catchers.splice(0, falling.length);
+            clearInterval(create);
+            score.innerHTML += " GAME OVER!";
+            alert("GAME OVER!");
         }
     }
 
