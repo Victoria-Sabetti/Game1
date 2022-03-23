@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
     <meta charset="utf-8" />
-    <title>Victoria Sabetti - Game Project</title>
+    <title>Game Project</title>
     <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-    <iframe width="0" height="0" src="https://www.youtube.com/watch?v=wsSQeEAoNqA&list=PLx0u8TSYiF88JNULzd4t_Smxp3DxiDpMV" frameborder="0" allowfullscreen></iframe>
-    <canvas></canvas>
+
+<body onclick="play_audio()">
+
+ <canvas></canvas>
+<audio id="myAudio">  
+  <source src="music.mp3" type="audio/mpeg">
+  <source src="music.ogg" type="audio/ogg">
+</audio>
+
+   
     <div class="score">
-        Score: <span id="score">0</span>
+	Click mouse to turn on/off music <br/>
+        Score: <span id="score">0</span> <br/> Lives: <span id="life">0</span>
+        <br/> Level: <span id="level">1</span>
+		
+		
     </div>
     <script src="script.js"></script>
 </body>
+
 </html>
